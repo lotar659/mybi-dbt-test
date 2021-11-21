@@ -1,0 +1,21 @@
+
+version: 2
+
+models:
+  - name: stg_costs
+    description: ""
+    columns:
+      - name: id
+        description: ""
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_crm
+    description: ""
+    columns:
+      - name: id
+        description: ""
+        tests:
+          - unique
+          - not_null
