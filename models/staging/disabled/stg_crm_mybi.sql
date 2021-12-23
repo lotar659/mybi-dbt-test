@@ -1,30 +1,44 @@
+{{
+	config(
+		enabled=False
+	)
+}}
+
 SELECT
 
 	  lf.id as id
 
-	, lf.clientids_id as client_id
-	, cl.email as client_email
-	, cl.phone as client_phone
-	, cl.clientid as client_amo_id
-
-	, lf.users_id as "user_id"
-	, us."name"  as "user_name"
-	, us.group_name  as "user_group_name"
-	
-	, lf.leads_id as lead_id
+	--, lf.leads_id as lead_id
+	, toUInt32(ld.lead_id) as lead_id
 	, ld."name"  as lead_name
 	, ld.status  as lead_status
 	, ld.pipeline  as lead_pipeline
 	, ld.loss_reason  as lead_loss_reason
 	, ld.is_deleted  as lead_is_deleted
 
-	, lf.contacts_id	as contact_id
-	, ct."name" as contact_name
+	--, lf.clientids_id as client_id
+	, cl.email as client_email
+	, cl.phone as client_phone
+	, cl.userid as client_user_id
+	, cl.clientid as client_id
+
+	--, lf.users_id as "user_id"
+	, us."name"  as amo_user_name
+	, us.group_name  as amo_user_group_name
+
+	--, lf.contacts_id as contact_id
+	, ct.contact_id as contact_id
+	, ct.name as contact_name
 	, ct.email as contact_email
 	, ct.phone as contact_phone
+	, ct.post as contact_post
+	, ct.company as contact_company
+	, ct.is_deleted as contact_is_deleted
 	
-	, lf.companies_id as company_id
-	, cp."name"  as company_name
+	--, lf.companies_id as company_id
+	, cp.company_id  as company_id
+	, cp.name  as company_name
+	, cp.site  as company_site
 	, cp.email  as company_email
 	, cp.phone  as company_phone
 	

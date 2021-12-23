@@ -24,13 +24,57 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_modules"
 
+vars:
+    account_id_ads: "30595"
+    account_id_amocrm: "30350"
+    account_id_currency: "33199"
+    account_id_direct: "30596, 33206, 33207"
+    account_id_facebook: "30246, 30610, 32296, 33162, 33203, 35748"
 
-# Configuring models
-# Full documentation: https://docs.getdbt.com/docs/configuring-models
+sources:
+    # ONLY ENABLE NECESSARY SOURCES FROM CORE MODULE
+    mybi_dbt_core:
+        sources:
+            +enabled: false
+            ads:
+                +enabled: true
+            amocrm:
+                +enabled: true
+            currency:
+                +enabled: true
+            direct:
+                +enabled: true
+            facebook:
+                +enabled: true
+            general:
+                +enabled: true
 
-# In this example config, we tell dbt to build all models in the example/ directory
-# as tables. These settings can be overridden in the individual model files
-# using the `{{ config(...) }}` macro.
 models:
-  mybi_dbt_ramm:
-    +materialized: table
+    # ONLY ENABLE NECESSARY MODELS FROM CORE MODULE
+    mybi_dbt_core:   
+        staging:
+            +enabled: false
+            ads:
+                +enabled: true
+            amocrm:
+                +enabled: true
+            currency:
+                +enabled: true
+            direct:
+                +enabled: true
+            facebook:
+                +enabled: true
+            general:
+                +enabled: true
+
+    mybi_dbt_ramm:
+        +materialized: table
+        
+        staging:
+            tags: ["staging"]
+        
+        intermediate:
+            tags: ["intermediate"]
+
+        # marts:
+        #     tags: ["marts"]

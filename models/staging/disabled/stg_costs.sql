@@ -1,20 +1,21 @@
+{{
+	config(
+		enabled=False
+	)
+}}
+
 SELECT
+
 	cf.id AS id
 
 --	, cf.dates_id
 	, parseDateTimeBestEffort(dt.simple_date) AS dt
-	
---	, cf.sites_id
-	, st."domain" AS site_domain 
-	, st.description AS site_description
-	
-	, cf.account_id AS account_id
-	, ac.status as account_status
-	, ac.caption as account_caption
-	, ac.enabled as account_enabled
-	, ac.service as account_service
---	, ac.account_id AS internal_account_id
-	
+
+	, impressions	
+	, clicks	
+	, "cost"
+	, vat_included
+		
 	, cf.traffic_id as traffic_id
 	, tr."source" as traffic_source
 	, tr.medium as traffic_medium
@@ -24,10 +25,17 @@ SELECT
 	, tr."grouping" as traffic_grouping
 	, tr.landing_page as traffic_landing_page
 		
-	, vat_included
-	, impressions	
-	, clicks	
-	, "cost"
+--	, cf.sites_id
+	, st."domain" AS site_domain 
+	, st.description AS site_description
+
+	, cf.account_id AS account_id
+	, ac.status as account_status
+	, ac.caption as account_caption
+	, ac.enabled as account_enabled
+	, ac.service as account_service
+--	, ac.account_id AS internal_account_id
+
 	
 FROM mybi.general_costs_facts AS cf
 	LEFT JOIN mybi.general_dates AS dt ON cf.dates_id = dt.id 

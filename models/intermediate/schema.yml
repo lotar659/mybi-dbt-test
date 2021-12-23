@@ -1,0 +1,13 @@
+
+version: 2
+
+models:
+  - name: intermediate_amocrm
+    description: ""
+    columns:
+      - name: id
+        description: ""
+        tests:
+          - unique:
+              severity: warn
+          - not_null
