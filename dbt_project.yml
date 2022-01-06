@@ -25,56 +25,34 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "dbt_modules"
 
 vars:
-    account_id_ads: "30595"
-    account_id_amocrm: "30350"
-    account_id_currency: "33199"
-    account_id_direct: "30596, 33206, 33207"
-    account_id_facebook: "30246, 30610, 32296, 33162, 33203, 35748"
+    tax_multiplier_google: 1.2    
+    tax_multiplier_facebook: 1
 
-sources:
-    # ONLY ENABLE NECESSARY SOURCES FROM CORE MODULE
-    mybi_dbt_core:
-        sources:
-            +enabled: false
-            ads:
-                +enabled: true
-            amocrm:
-                +enabled: true
-            currency:
-                +enabled: true
-            direct:
-                +enabled: true
-            facebook:
-                +enabled: true
-            general:
-                +enabled: true
 
 models:
-    # ONLY ENABLE NECESSARY MODELS FROM CORE MODULE
-    mybi_dbt_core:   
-        staging:
-            +enabled: false
-            ads:
-                +enabled: true
-            amocrm:
-                +enabled: true
-            currency:
-                +enabled: true
-            direct:
-                +enabled: true
-            facebook:
-                +enabled: true
-            general:
-                +enabled: true
-
     mybi_dbt_ramm:
         +materialized: table
+        +tags: ["ramm"]
         
         staging:
-            tags: ["staging"]
-        
-        intermediate:
-            tags: ["intermediate"]
+            +tags: ["staging"]
 
-        # marts:
-        #     tags: ["marts"]
+            amocrm:
+                +tags: ["amocrm"]
+            costs:
+                +tags: ["costs"]
+            visits:
+                +tags: ["visits"]        
+
+        intermediate:
+            +tags: ["intermediate"]
+
+            amocrm:
+                +tags: ["amocrm"]
+            costs:
+                +tags: ["costs"]
+            visits:
+                +tags: ["visits"]
+                
+        marts:
+            tags: ["marts"]

@@ -19,20 +19,20 @@ SELECT
 	  
 	, cf.impressions as impressions
 	, cf.clicks as clicks
-	, cf.cost * coalesce(cif1.rate, cif2.rate, 1) AS cost 
+	, cf.cost * coalesce(cif1.rate, cif2.rate, 1) * {{ var("tax_multiplier_google") }} as cost 
 	
-FROM mybi.ads_campaigns_facts AS cf
-	LEFT JOIN mybi.ads_campaigns AS cp
+FROM {{ ref('stg_ads_campaigns_facts') }} AS cf
+	LEFT JOIN {{ ref('stg_ads_campaigns') }} AS cp
 		ON cp.id = cf.campaigns_id 
-	LEFT JOIN mybi.general_dates AS gd
+	LEFT JOIN {{ ref('stg_general_dates') }} AS gd
 		ON gd.id = cf.dates_id 
-	LEFT JOIN mybi.general_accounts AS ga
+	LEFT JOIN {{ ref('stg_general_accounts') }} AS ga
 		ON ga.account_id = cf.account_id 
-	LEFT JOIN mybi.currency_items_facts AS cif1 
+	LEFT JOIN {{ ref('stg_currency_items_facts') }} AS cif1 
 		ON cif1.dates_id = cf.dates_id 
-			AND cif1.items_id = 22.0
-			AND cf.account_id = 35957.0
-	LEFT JOIN mybi.currency_items_facts AS cif2 
+			AND cif1.items_id = 22
+			AND cf.account_id = 35957
+	LEFT JOIN {{ ref('stg_currency_items_facts') }} AS cif2 
 		ON cif2.dates_id = cf.dates_id 
-			AND cif2.items_id = 22.0
-			AND cf.account_id = 35964.0
+			AND cif2.items_id = 22
+			AND cf.account_id = 35964

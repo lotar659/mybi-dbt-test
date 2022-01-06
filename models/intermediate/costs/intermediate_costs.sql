@@ -5,9 +5,9 @@ SELECT
 	
 	, company	    
 	  
-    , source
-    , medium  
-  	, campaign
+    , coalesce(nullif(source, ''), 'undefined') as source
+    , coalesce(nullif(medium, ''), 'undefined') as medium
+  	, coalesce(nullif(campaign, ''), 'undefined') as campaign
 	, campaign_id
 	
 	, dt
@@ -18,7 +18,7 @@ SELECT
 	  
 FROM {{ ref('intermediate_ads') }} 
 
-union all 
+UNION ALL
 
 SELECT
 
@@ -27,9 +27,9 @@ SELECT
 	
 	, company	    
 	  
-    , source
-    , medium  
-  	, campaign
+    , coalesce(nullif(source, ''), 'undefined') as source
+    , coalesce(nullif(medium, ''), 'undefined') as medium
+  	, coalesce(nullif(campaign, ''), 'undefined') as campaign
 	, campaign_id
 	
 	, dt
@@ -40,7 +40,7 @@ SELECT
 	  
 FROM {{ ref('intermediate_direct') }} 
 
-union all
+UNION ALL
 
 SELECT
 
@@ -49,9 +49,9 @@ SELECT
 	
 	, company	    
 	  
-    , source
-    , medium  
-  	, campaign
+    , coalesce(nullif(source, ''), 'undefined') as source
+    , coalesce(nullif(medium, ''), 'undefined') as medium
+  	, coalesce(nullif(campaign, ''), 'undefined') as campaign
 	, campaign_id
 	
 	, dt

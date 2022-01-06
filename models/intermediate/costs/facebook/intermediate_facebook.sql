@@ -5,7 +5,7 @@ SELECT
 	
 	, CASE
 		WHEN cf.account_id IN (35966) THEN 'zazumedia'
-		WHEN cf.account_id IN (36077) THEN 'zazumedia'
+		WHEN cf.account_id IN (39753) THEN 'smsdar'
 	  END AS company	    
 	  
 	, 'cpc' as medium
@@ -17,12 +17,15 @@ SELECT
 	  
 	, cf.impressions as impressions
 	, cf.clicks as clicks
-	, cf.cost as cost
+	, cf.cost * coalesce(cif1.rate, 1) * {{ var("tax_multiplier_facebook") }} as cost
 	  
-FROM mybi.facebook_campaigns_facts AS cf
-	LEFT JOIN mybi.facebook_campaigns AS cp
+FROM {{ ref('stg_facebook_campaigns_facts') }} AS cf
+	LEFT JOIN {{ ref('stg_facebook_campaigns') }} AS cp
 		ON cp.id = cf.campaigns_id 
-	LEFT JOIN mybi.general_dates AS gd
+	LEFT JOIN {{ ref('stg_general_dates') }} AS gd
 		ON gd.id = cf.dates_id 
-	LEFT JOIN mybi.general_accounts AS ga
+	LEFT JOIN {{ ref('stg_general_accounts') }} AS ga
 		ON ga.account_id = cf.account_id
+	LEFT JOIN {{ ref('stg_currency_items_facts') }} AS cif1 
+		ON cif1.dates_id = cf.dates_id 
+			AND cif1.items_id = 22
