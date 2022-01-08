@@ -1,0 +1,34 @@
+name: Deploy dbt project
+
+# Controls when the action will run. 
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 5 * * *'
+
+jobs:
+  dbt_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: deploy dbt
+        uses: kzzzr/mybi-dbt-action@v3
+        env:
+          DBT_TARGET: ${{ secrets.DBT_TARGET }}
+          DBT_SCHEMA: ${{ secrets.DBT_SCHEMA }}
+          DBT_HOST: ${{ secrets.DBT_HOST }}
+          DBT_PORT: ${{ secrets.DBT_PORT }}
+          DBT_USER: ${{ secrets.DBT_USER }}
+          DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
+          DBT_SECURE: ${{ secrets.DBT_SECURE }}
+      - name: Setup tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
+        timeout-minutes: 10
+      - name: Send Telegram message
+        uses: xinthink/action-telegram@v1.1
+        with:
+          botToken: ${{ secrets.TELEGRAM_TOKEN }}
+          chatId: ${{ secrets.TELEGRAM_TO }}
+          jobStatus: ${{ job.status }}
+          skipSuccess: false
