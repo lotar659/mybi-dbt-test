@@ -29,3 +29,5 @@ FROM {{ ref('stg_facebook_campaigns_facts') }} AS cf
 	LEFT JOIN {{ ref('stg_currency_items_facts') }} AS cif1 
 		ON cif1.dates_id = cf.dates_id 
 			AND cif1.items_id = 22
+
+settings join_use_nulls = 1

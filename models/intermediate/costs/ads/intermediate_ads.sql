@@ -20,6 +20,9 @@ SELECT
 	, cf.impressions as impressions
 	, cf.clicks as clicks
 	, cf.cost * coalesce(cif1.rate, cif2.rate, 1) * {{ var("tax_multiplier_google") }} as cost 
+	, cf.cost as cost_raw
+	, cif1.rate as cif1_rate
+	, cif2.rate as cif2_rate
 	
 FROM {{ ref('stg_ads_campaigns_facts') }} AS cf
 	LEFT JOIN {{ ref('stg_ads_campaigns') }} AS cp
@@ -36,3 +39,5 @@ FROM {{ ref('stg_ads_campaigns_facts') }} AS cf
 		ON cif2.dates_id = cf.dates_id 
 			AND cif2.items_id = 22
 			AND cf.account_id = 35964
+
+settings join_use_nulls = 1
