@@ -77,10 +77,26 @@ SELECT
 	, ia.company as company
 
 	, coalesce(nullif(iv.traffic_source, ''), 'undefined') as traffic_source
-	, coalesce(nullif(iv.source, ''), 'undefined') as source
-	, coalesce(nullif(iv.medium, ''), 'undefined') as medium
-	, coalesce(nullif(iv.campaign, ''), 'undefined') as campaign
-	, coalesce(nullif(iv.content, ''), 'undefined') as content
+
+	, case 
+		when ia.UTM_Source in ('referal') then ia.UTM_Source
+		else coalesce(nullif(iv.source, ''), 'undefined')
+	  end as source
+
+	, case 
+		when ia.UTM_Source in ('referal') then 'undefined'
+		else coalesce(nullif(iv.medium, ''), 'undefined')
+	  end as medium
+
+	, case 
+		when ia.UTM_Source in ('referal') then 'undefined'
+		else coalesce(nullif(iv.campaign, ''), 'undefined')
+	  end as campaign
+
+	, case 
+		when ia.UTM_Source in ('referal') then ia.UTM_Content
+		else coalesce(nullif(iv.content, ''), 'undefined')
+	  end as content
 
 FROM {{ ref('stg_amocrm_united') }} AS ia
 	LEFT JOIN intermediate_visits AS iv ON iv.client_id = ia.client_id_int
