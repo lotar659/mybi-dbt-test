@@ -102,6 +102,8 @@ SELECT
       nullif(parsed.campaign_raw, ''),
       'undefined') as campaign
 
+  , parsed.content as content
+
 -- DEBUG
 --  , parsed.campaign_raw as campaign_raw
 --  , parsed.content as content

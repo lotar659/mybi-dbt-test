@@ -10,6 +10,7 @@ with intermediate_visits as (
 		, `source`
 		, medium
 		, campaign
+		, content
 
 		--, traffic_source_importance
 		, row_number() over (partition by client_id, dt order by traffic_source_importance asc) as rn	
@@ -79,6 +80,7 @@ SELECT
 	, coalesce(nullif(iv.source, ''), 'undefined') as source
 	, coalesce(nullif(iv.medium, ''), 'undefined') as medium
 	, coalesce(nullif(iv.campaign, ''), 'undefined') as campaign
+	, coalesce(nullif(iv.content, ''), 'undefined') as content
 
 FROM {{ ref('stg_amocrm_united') }} AS ia
 	LEFT JOIN intermediate_visits AS iv ON iv.client_id = ia.client_id_int

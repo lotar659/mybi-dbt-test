@@ -12,6 +12,7 @@ select
 	, `source`
 	, medium
 	, campaign
+	, content
 
 -------------------------
 --  intermediate_costs --
@@ -65,6 +66,7 @@ select
     , `source`
 	, medium
 	, campaign
+	, null as content
 
 -------------------------
 --  intermediate_costs --
@@ -119,6 +121,7 @@ select
 	, `source`
 	, medium
 	, campaign
+	, content
     
 -------------------------
 --  intermediate_costs --
@@ -137,7 +140,7 @@ select
 --------------------------
 
 	, client_id_int as client_id
-	
+
 --------------------------
 --  intermediate_amocrm --
 --------------------------
@@ -172,6 +175,7 @@ select
 	, `source`
 	, medium
 	, campaign
+	, content
     
 -------------------------
 --  intermediate_costs --
@@ -227,6 +231,7 @@ select
 	, `source`
 	, medium
 	, campaign
+	, content
     
 -------------------------
 --  intermediate_costs --
