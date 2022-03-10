@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+
+  - name: amocrm
+    # database: planoplan
+    schema: datalens
+    tags: ["sources", "amocrm"]      
+    # freshness:
+    #   warn_after: {count: 12, period: hour}
+    #   error_after: {count: 24, period: hour}
+    # loaded_at_field: created_at
+    description: "AMO CRM data (loaded by RAMM)"
+
+    tables:
+
+      - name: smsdar
+        identifier: "___smsdar"
+      - name: smspobeda
+        identifier: "___smspobeda"
+      - name: zazumedia
+        identifier: "___zazumedia"

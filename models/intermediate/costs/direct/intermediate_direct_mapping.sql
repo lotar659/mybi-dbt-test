@@ -17,3 +17,5 @@ FROM {{ ref('stg_direct_ads_facts') }} as af
     LEFT JOIN {{ ref('stg_direct_campaigns') }} as ac on ac.id = af.campaigns_id
     LEFT JOIN {{ ref('stg_direct_adgroups') }} as ag on ag.id = af.adgroups_id
     LEFT JOIN {{ ref('stg_direct_ads') }} as aa on aa.id = af.ads_id
+
+settings join_use_nulls = 1

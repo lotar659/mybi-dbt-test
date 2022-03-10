@@ -78,7 +78,7 @@ SELECT
 	, `ym:s:windowClientWidth`
 	, `ym:s:windowClientHeight`
     , 'smsdar' as company
-FROM datalens.sd_visits
+FROM {{ source('visits', 'sd') }}
 
 UNION ALL
 
@@ -162,7 +162,7 @@ SELECT
 	, `ym:s:windowClientWidth`
 	, `ym:s:windowClientHeight`
     , 'smspobeda' as company
-FROM datalens.sp_visits
+FROM {{ source('visits', 'sp') }}
 
 UNION ALL
 
@@ -246,4 +246,4 @@ SELECT
 	, `ym:s:windowClientWidth`
 	, `ym:s:windowClientHeight`
     , 'zazumedia' as company
-FROM datalens.zm_visits
+FROM {{ source('visits', 'zm') }}

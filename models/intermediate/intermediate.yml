@@ -1,0 +1,54 @@
+
+version: 2
+
+models:
+
+  - name: intermediate_costs
+    description: ""
+    columns:
+      - name: source
+        tests:
+          - not_null
+      - name: medium
+        tests:
+          - not_null
+      - name: campaign
+        tests:
+          - not_null
+
+  - name: intermediate_visits
+    description: ""
+    columns:
+      - name: company
+        tests:
+          - not_null
+      - name: dt
+        tests:
+          - not_null
+      - name: client_id
+        tests:
+          - not_null
+      - name: traffic_source
+        tests:
+          - not_null
+      - name: source
+        tests:
+          - not_null
+      - name: medium
+        tests:
+          - not_null
+      - name: campaign
+        tests:
+          - not_null
+      - name: content
+        tests:
+          - not_null
+
+  - name: intermediate_amocrm
+    description: ""
+    columns:
+      - name: id
+        tests:
+          - unique:
+              severity: warn
+          - not_null

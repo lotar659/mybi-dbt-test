@@ -29,3 +29,5 @@ FROM {{ ref('stg_direct_campaigns_facts') }} AS cf
 		ON gd.id = cf.dates_id 
 	LEFT JOIN {{ ref('stg_general_accounts') }} AS ga
 		ON ga.account_id = cf.account_id
+
+settings join_use_nulls = 1		

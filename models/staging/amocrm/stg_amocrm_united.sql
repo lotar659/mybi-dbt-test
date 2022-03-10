@@ -51,7 +51,7 @@ SELECT
 	, yclid
 	, fbclid
 	, 'smsdar' as company
-FROM datalens.`___smsdar`
+FROM {{ source('amocrm', 'smsdar') }}
 
 UNION ALL 
 
@@ -108,7 +108,7 @@ SELECT
 	, yclid
 	, fbclid
 	, 'smspobeda' as company
-FROM datalens.`___smspobeda`
+FROM {{ source('amocrm', 'smspobeda') }}
 
 UNION ALL
 
@@ -165,4 +165,4 @@ SELECT
 	, yclid
 	, fbclid
 	, 'zazumedia' as company
-FROM datalens.`___zazumedia`
+FROM {{ source('amocrm', 'zazumedia') }}

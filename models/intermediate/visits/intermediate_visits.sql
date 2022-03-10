@@ -3,7 +3,7 @@ with parsed as (
 
 SELECT
 
-	  company
+	  visits.company as company
 	, `ym:s:date` as dt	
   , `ym:s:dateTimeUTC` as ts
 	, `ym:s:clientID` as client_id	
@@ -37,17 +37,17 @@ SELECT
 
   , case
       -- ad
-      when traffic_source in ('ad') then coalesce(nullif(sm.source_master, ''), `ym:s:UTMSource`)
+      when traffic_source in ('ad') then coalesce(source_mapping.master, nullif(`ym:s:UTMSource`, ''), 'undefined')
       -- direct
       when traffic_source in ('direct') then 'direct'
       -- internal
-      when traffic_source in ('internal') then `ym:s:lastReferalSource`
+      when traffic_source in ('internal') then coalesce(nullif(`ym:s:lastReferalSource`, ''), 'undefined')
       -- organic
       when traffic_source in ('organic') then `ym:s:lastSearchEngine`
       -- referral
-      when traffic_source in ('referral') then `ym:s:lastReferalSource`
+      when traffic_source in ('referral') then coalesce(nullif(`ym:s:lastReferalSource`, ''), 'undefined')
       -- email
-      when traffic_source in ('email') then `ym:s:lastReferalSource`
+      when traffic_source in ('email') then coalesce(nullif(`ym:s:lastReferalSource`, ''), 'undefined')
       -- social
       when traffic_source in ('social') then `ym:s:lastSocialNetwork`
       -- saved
@@ -66,19 +66,18 @@ SELECT
 	
   , coalesce(nullif(`ym:s:UTMMedium`, ''), 'undefined') as medium
 
-	, case `ym:s:UTMCampaign`
-      when 'PM_WhatsApp' then 'Performance Max | WhatsApp | РФ'
-      else `ym:s:UTMCampaign`
-    end as campaign_raw
+	, coalesce(campaign_mapping.campaign_name, nullif(`ym:s:UTMCampaign`, ''), 'undefined') as campaign_raw
 
-  , `ym:s:UTMContent` as content
+  , coalesce(nullif(`ym:s:UTMContent`, ''), 'undefined') as content
 	, CASE 
 		  WHEN ilike(`ym:s:UTMContent`, '%cid%') THEN toUInt64OrNull(splitByChar('|', `ym:s:UTMContent`)[2])
 		  ELSE toUInt64OrNull(content)
 	  END AS campaign_id
 
-FROM {{ ref('stg_visits_united') }} as vu
-  left any join {{ ref('source_mapping') }} as sm on sm.source_raw = vu.`ym:s:UTMSource`
+FROM {{ ref('stg_visits_united') }} as visits
+  LEFT ANY JOIN {{ source('gsheet', 'source_mapping') }} as source_mapping on source_mapping.raw = visits.`ym:s:UTMSource`
+  LEFT ANY JOIN {{ source('gsheet', 'campaign_mapping') }} as campaign_mapping on campaign_mapping.company = visits.company
+    and campaign_mapping.`UTMCampaign` = visits.`ym:s:UTMCampaign`
 
 )
 
@@ -92,27 +91,31 @@ SELECT
   , parsed.traffic_source as traffic_source
   , parsed.traffic_source_importance as traffic_source_importance
 
-  , coalesce(nullif(parsed.source, ''), 'undefined') as source
-
-  , coalesce(nullif(parsed.medium, ''), 'undefined') as medium
-  
-  , coalesce(nullif(cid.campaign_name, ''), 
-      nullif(gid.campaign_name, ''), 
+  , coalesce(parsed.source, 'undefined') as source
+  , parsed.medium as medium  
+  , coalesce(
+      nullif(cid.campaign_name, ''),
+      nullif(gid.campaign_name, ''),
       nullif(aid.campaign_name, ''),
-      nullif(parsed.campaign_raw, ''),
-      'undefined') as campaign
+      parsed.campaign_raw) as campaign
 
   , parsed.content as content
 
 -- DEBUG
---  , parsed.campaign_raw as campaign_raw
---  , parsed.content as content
---	, parsed.campaign_id as campaign_id
---  , nullif(cid.campaign_name, '') as cid_campaign_name
---  , nullif(gid.campaign_name, '') as gid_campaign_name
---  , nullif(aid.campaign_name, '') as aid_campaign_name
+  , parsed.campaign_raw as campaign_raw
+	, parsed.campaign_id as campaign_id
+
+  , cid.campaign_id as cid_campaign_id
+  , gid.adgroup_id as gid_adgroup_id
+  , aid.ad_id as aid_ad_id
+
+  , cid.campaign_name as cid_campaign_name
+  , gid.campaign_name as gid_campaign_name
+  , aid.campaign_name as aid_campaign_name
 
 from parsed
-  left any join {{ ref('intermediate_mapping') }} as cid on cid.campaign_id = parsed.campaign_id
-  left any join {{ ref('intermediate_mapping') }} as gid on gid.adgroup_id = parsed.campaign_id
-  left any join {{ ref('intermediate_mapping') }} as aid on aid.ad_id = parsed.campaign_id
+  left any join {{ ref('intermediate_costs_mapping') }} as cid on cid.campaign_id = parsed.campaign_id
+  left any join {{ ref('intermediate_costs_mapping') }} as gid on gid.adgroup_id = parsed.campaign_id
+  left any join {{ ref('intermediate_costs_mapping') }} as aid on aid.ad_id = parsed.campaign_id
+
+settings join_use_nulls = 1  

@@ -1,0 +1,24 @@
+
+version: 2
+
+models:
+
+  - name: stg_amocrm_united
+    description: ""
+    columns:
+      - name: id 
+        description: ""
+        tests:
+          - not_null
+    tests:
+      - unique:
+          column_name: (cast(id as String) || company)
+
+  - name: stg_visits_united
+    description: ""
+    columns:
+      - name: "`ym:s:visitID`"
+        description: ""
+        tests:
+          - not_null
+          - unique

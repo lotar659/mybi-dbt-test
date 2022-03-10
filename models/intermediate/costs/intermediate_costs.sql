@@ -5,9 +5,9 @@ SELECT
 	
 	, company	    
 	  
-    , coalesce(nullif(source, ''), 'undefined') as source
-    , coalesce(nullif(medium, ''), 'undefined') as medium
-  	, coalesce(nullif(campaign, ''), 'undefined') as campaign
+    , coalesce(source, 'undefined') as source
+    , coalesce(medium, 'undefined') as medium
+  	, coalesce(campaign, 'undefined') as campaign
 	, campaign_id
 	
 	, dt
@@ -27,9 +27,9 @@ SELECT
 	
 	, company	    
 	  
-    , coalesce(nullif(source, ''), 'undefined') as source
-    , coalesce(nullif(medium, ''), 'undefined') as medium
-  	, coalesce(nullif(campaign, ''), 'undefined') as campaign
+    , coalesce(source, 'undefined') as source
+    , coalesce(medium, 'undefined') as medium
+  	, coalesce(campaign, 'undefined') as campaign
 	, campaign_id
 	
 	, dt
@@ -49,9 +49,9 @@ SELECT
 	
 	, company	    
 	  
-    , coalesce(nullif(source, ''), 'undefined') as source
-    , coalesce(nullif(medium, ''), 'undefined') as medium
-  	, coalesce(nullif(campaign, ''), 'undefined') as campaign
+    , coalesce(source, 'undefined') as source
+    , coalesce(medium, 'undefined') as medium
+  	, coalesce(campaign, 'undefined') as campaign
 	, campaign_id
 	
 	, dt
