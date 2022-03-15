@@ -2,7 +2,8 @@ SELECT
 
 	  JSONExtract(_airbyte_data, 'account_id', 'UInt16') AS account_id
 	, JSONExtract(_airbyte_data, 'dates_id', 'UInt32') AS dates_id
-	  
+	, JSONExtract(_airbyte_data, 'id', 'UInt32') AS id
+
 	, JSONExtract(_airbyte_data, 'campaigns_id', 'UInt32') AS campaigns_id
 	, JSONExtract(_airbyte_data, 'adgroups_id', 'UInt32') AS adgroups_id
 	, JSONExtract(_airbyte_data, 'ads_id', 'UInt32') AS ads_id
