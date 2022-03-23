@@ -22,6 +22,7 @@ jobs:
           DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
           DBT_SECURE: ${{ secrets.DBT_SECURE }}
       - name: Send Telegram message
+        if: always()
         uses: xinthink/action-telegram@v1.1
         with:
           botToken: ${{ secrets.TELEGRAM_TOKEN }}
