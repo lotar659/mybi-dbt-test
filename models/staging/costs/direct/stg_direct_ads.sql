@@ -1,7 +1,7 @@
 SELECT
 
-	  JSONExtract(_airbyte_data, 'id', 'UInt32') AS id
-	, toUInt64OrNull(JSONExtract(_airbyte_data, 'ad_id', 'String')) AS ad_id
-	, JSONExtract(_airbyte_data, 'title', 'String') AS name
+	  `id`
+	, toUInt64OrNull(`ad_id`) AS `ad_id`
+	, `title` as `name`
 
 FROM {{ source('mybi', 'direct_ads') }}

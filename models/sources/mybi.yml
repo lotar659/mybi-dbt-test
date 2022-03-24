@@ -4,7 +4,7 @@ sources:
 
   - name: mybi
     # database: planoplan
-    schema: mybi_airbyte
+    schema: mybi_pg
     tags: ["sources", "mybi_airbyte"]      
     # freshness:
     #   warn_after: {count: 12, period: hour}
@@ -14,46 +14,26 @@ sources:
 
     tables:
       - name: general_dates
-        identifier: _airbyte_raw_general_dates
       - name: general_accounts
-        identifier: _airbyte_raw_general_accounts
 
       - name: currency_items_facts
-        identifier: _airbyte_raw_currency_items_facts
 
       - name: ads_campaigns_facts
-        identifier: _airbyte_raw_ads_campaigns_facts
       - name: ads_campaigns
-        identifier: _airbyte_raw_ads_campaigns
       - name: ads_keywords_facts
-        identifier: _airbyte_raw_ads_keywords_facts
       - name: ads_ads_facts
-        identifier: _airbyte_raw_ads_ads_facts
       - name: ads_adgroups
-        identifier: _airbyte_raw_ads_adgroups
       - name: ads_ads
-        identifier: _airbyte_raw_ads_ads
       - name: ads_keywords
-        identifier: _airbyte_raw_ads_keywords
         
       - name: direct_campaigns_facts
-        identifier: _airbyte_raw_direct_campaigns_facts
       - name: direct_campaigns
-        identifier: _airbyte_raw_direct_campaigns
       - name: direct_ads_facts
-        identifier: _airbyte_raw_direct_ads_facts
       - name: direct_ads
-        identifier: _airbyte_raw_direct_ads
       - name: direct_adgroups
-        identifier: _airbyte_raw_direct_adgroups
 
       - name: facebook_campaigns_facts
-        identifier: _airbyte_raw_facebook_campaigns_facts
       - name: facebook_campaigns
-        identifier: _airbyte_raw_facebook_campaigns
       - name: facebook_ads_facts
-        identifier: _airbyte_raw_facebook_ads_facts
       - name: facebook_ads
-        identifier: _airbyte_raw_facebook_ads
       - name: facebook_adsets
-        identifier: _airbyte_raw_facebook_adsets

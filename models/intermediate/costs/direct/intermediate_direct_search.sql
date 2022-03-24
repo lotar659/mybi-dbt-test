@@ -16,7 +16,7 @@ SELECT
 	, cp.name AS campaign
 	, CAST(cp.campaign_id AS UInt32) AS campaign_id
 	
-	, parseDateTime32BestEffortOrNull(gd.simple_date) AS dt
+	, gd.simple_date AS dt
 	
 	, cf.impressions_search as impressions
 	, cf.clicks_search as clicks

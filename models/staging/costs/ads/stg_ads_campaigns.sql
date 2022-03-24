@@ -1,7 +1,7 @@
 SELECT
 
-	  JSONExtract(_airbyte_data, 'id', 'UInt32') AS id
-	, JSONExtract(_airbyte_data, 'campaign_id', 'UInt64') AS campaign_id
-	, JSONExtract(_airbyte_data, 'name', 'String') AS name
+	  `id`
+	, CAST(`campaign_id` AS UInt64) as `campaign_id`
+	, `name`
 
 FROM {{ source('mybi', 'ads_campaigns') }}

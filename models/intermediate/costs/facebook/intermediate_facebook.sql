@@ -13,7 +13,7 @@ SELECT
   	, cp.name AS campaign
 	, CAST(cp.campaign_id AS UInt32) AS campaign_id
 	
-	, parseDateTime32BestEffortOrNull(gd.simple_date) AS dt
+	, gd.simple_date AS dt
 	  
 	, cf.impressions as impressions
 	, cf.clicks as clicks
@@ -28,6 +28,6 @@ FROM {{ ref('stg_facebook_campaigns_facts') }} AS cf
 		ON ga.account_id = cf.account_id
 	LEFT JOIN {{ ref('stg_currency_items_facts') }} AS cif1 
 		ON cif1.dates_id = cf.dates_id 
-			AND cif1.items_id = 22
+			AND cif1.items_id = CAST(22 AS Int32)
 
 settings join_use_nulls = 1

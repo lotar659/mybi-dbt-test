@@ -14,7 +14,7 @@ mybi_dbt_ramm:
       user: "{{ env_var('DBT_USER') }}"
       password: "{{ env_var('DBT_PASSWORD') }}"
       secure: "{{ env_var('DBT_SECURE') | as_bool }}"
-      threads: 3  
+      threads: 1
     # ci:
     #   type: clickhouse
     #   schema: "{{ env_var('DBT_SCHEMA') }}"
