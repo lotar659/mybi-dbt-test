@@ -78,7 +78,7 @@ select
 
 	, impressions
 	, clicks
-	, cost
+	, CAST(cost AS Float64) as cost
 
 --------------------------
 --  intermediate_visits --
