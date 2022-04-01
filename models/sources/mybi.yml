@@ -15,6 +15,8 @@ sources:
     tables:
       - name: general_dates
       - name: general_accounts
+      - name: general_sites
+      - name: general_traffic
 
       - name: currency_items_facts
 

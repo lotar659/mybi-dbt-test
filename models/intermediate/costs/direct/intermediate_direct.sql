@@ -3,11 +3,19 @@ select
 	  account_id
 	, caption
 	, company	  
-	, medium
-	, source
-	, campaign
-	, campaign_id
 	, dt
+    , device
+
+	, source
+	, medium
+	, campaign_id
+	, campaign
+    , traffic_campaign
+    , content
+    , keyword
+    , domain
+    , landing_page    
+
 	, impressions
 	, clicks
 	, cost
@@ -21,11 +29,19 @@ select
 	  account_id
 	, caption
 	, company	  
-	, medium
-	, source
-	, campaign
-	, campaign_id
 	, dt
+    , device
+
+	, source
+	, medium
+	, campaign_id
+	, campaign
+    , traffic_campaign
+    , content
+    , keyword
+    , domain
+    , landing_page    
+
 	, impressions
 	, clicks
 	, cost
