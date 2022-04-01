@@ -1,12 +1,17 @@
 SELECT
 
 	  `account_id`
-	, `dates_id`
 	, `id`
+	, `dates_id`
+	, `traffic_id`
+	, `sites_id`
 
 	, `campaigns_id`
 	, `adgroups_id`
 	, `ads_id`
+
+	, `ad_network`
+	, `device`        
 	
     , `impressions`
 	, `clicks`
