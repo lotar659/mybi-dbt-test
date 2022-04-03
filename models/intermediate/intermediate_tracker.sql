@@ -14,6 +14,12 @@ select
 	, campaign
 	, content
 
+    , keyword
+    , landing_page    
+    , device
+    , region
+
+
 -------------------------
 --  intermediate_costs --
 -------------------------
@@ -66,7 +72,12 @@ select
     , `source`
 	, medium
 	, campaign
-	, null as content
+	, content
+
+    , keyword
+    , landing_page    
+    , device
+    , 'undefined' as region
 
 -------------------------
 --  intermediate_costs --
@@ -78,7 +89,7 @@ select
 
 	, impressions
 	, clicks
-	, CAST(cost AS Float64) as cost
+	, cost
 
 --------------------------
 --  intermediate_visits --
@@ -122,6 +133,11 @@ select
 	, medium
 	, campaign
 	, content
+
+    , keyword
+    , landing_page    
+    , device
+    , region    
     
 -------------------------
 --  intermediate_costs --
@@ -176,6 +192,11 @@ select
 	, medium
 	, campaign
 	, content
+
+    , keyword
+    , landing_page    
+    , device
+    , region    
     
 -------------------------
 --  intermediate_costs --
@@ -232,6 +253,11 @@ select
 	, medium
 	, campaign
 	, content
+
+    , keyword
+    , landing_page    
+    , device
+    , region    
     
 -------------------------
 --  intermediate_costs --
