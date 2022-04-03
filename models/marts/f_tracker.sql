@@ -11,6 +11,11 @@ select
 	, campaign
 	, content
 
+    , keyword
+    , landing_page    
+    , device
+    , region    
+
 	-- costs
 	, impressions
 	, clicks
