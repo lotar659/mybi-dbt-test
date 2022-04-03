@@ -12,6 +12,11 @@ with intermediate_visits as (
 		, campaign
 		, content
 
+        , keyword
+        , landing_page    
+        , device
+        , region
+
 		--, traffic_source_importance
 		, row_number() over (partition by client_id, dt order by traffic_source_importance asc) as rn	
 
@@ -98,6 +103,11 @@ SELECT
 		when amocrm.UTM_Source in ('referal') then amocrm.UTM_Content
 		else visits.content
 	  end as content
+
+    , visits.keyword as keyword
+    , visits.landing_page as landing_page
+    , visits.device as device
+    , visits.region as region
 
 FROM {{ ref('stg_amocrm_united') }} AS amocrm
 	LEFT JOIN intermediate_visits AS visits ON visits.client_id = amocrm.client_id_int
