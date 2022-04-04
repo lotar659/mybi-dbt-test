@@ -68,7 +68,7 @@ select
     , 'costs' as row_source
     , dt as create_date
 	
-	, 'ad' as traffic_source
+	, traffic_source
     , `source`
 	, medium
 	, campaign
