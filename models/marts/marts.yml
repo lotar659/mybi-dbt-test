@@ -1,0 +1,11 @@
+
+version: 2
+
+models:
+
+  - name: f_tracker
+    columns:
+      - name: row_id
+        tests:
+          - not_null
+          - unique

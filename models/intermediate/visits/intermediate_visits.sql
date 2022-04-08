@@ -3,7 +3,8 @@ with parsed as (
 
 SELECT
 
-      visits.company as company
+      `ym:s:visitID` as id
+    , visits.company as company
     , `ym:s:date` as dt	
     , `ym:s:dateTimeUTC` as ts
     , `ym:s:clientID` as client_id	
@@ -94,7 +95,8 @@ FROM {{ ref('stg_visits_united') }} as visits
 
 SELECT
 
-      parsed.company as company
+      parsed.id as id
+    , parsed.company as company
     , parsed.dt as dt
     , parsed.ts as ts
     , parsed.client_id as client_id

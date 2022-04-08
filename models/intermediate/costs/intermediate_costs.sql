@@ -1,6 +1,7 @@
 SELECT
 
-	  account_id
+	  CAST(id, 'UInt64') as id
+    , account_id
 	, caption 
 	, company	    
     , dt
@@ -26,7 +27,8 @@ UNION ALL
 
 SELECT
 
-	  account_id
+	  CAST(id, 'UInt64') as id
+    , account_id
 	, caption
 	, company
 	, dt
@@ -52,7 +54,8 @@ UNION ALL
 
 SELECT
 
-	  account_id
+	  CAST(id, 'UInt64') as id
+    , account_id
 	, caption
 	, company
 	, dt
@@ -79,7 +82,8 @@ UNION ALL
 
 SELECT
 
-	  0 as account_id
+      halfMD5(CONCAT(CAST(date_month, 'String'), company)) as id      
+	, 0 as account_id
 	, '' as caption
 	, company
 	, date_month as dt
@@ -97,6 +101,6 @@ SELECT
 	  
 	, 0
 	, 0
-	, cost
+	, CAST(cost, 'Float64') as cost
 	  
 FROM {{ source('gsheet', 'organic_costs') }}

@@ -1,6 +1,7 @@
 SELECT
 
 	  cf.account_id as account_id
+    , halfMD5(CONCAT(CAST(cf.id, 'String'), 'facebook')) as id
 
 	, ga.caption as caption
 	, CASE

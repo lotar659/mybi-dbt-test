@@ -4,7 +4,9 @@
 
 select
 
-	  company
+      id
+
+    , company
     , 'visits' as row_source      
     , dt as create_date
 
@@ -64,7 +66,9 @@ union all
 
 select
 
-	  company
+      id
+      
+    , company
     , 'costs' as row_source
     , dt as create_date
 	
@@ -124,7 +128,10 @@ union all
 
 select
 
-	  company
+      
+      halfMD5(CONCAT(CAST(id, 'String'), company, 'amocrm')) as id
+      
+    , company
     , 'amocrm' as row_source      
 	, date_create as create_date
 
@@ -183,7 +190,9 @@ union all
 
 select
 
-	  company
+      halfMD5(CONCAT(CAST(id, 'String'), company, 'amocrm_rejected')) as id
+      
+    , company
     , 'amocrm_rejected' as row_source      
 	, reason_date as create_date
 
@@ -244,7 +253,9 @@ union all
 
 select
 
-	  company
+      halfMD5(CONCAT(CAST(id, 'String'), company, 'amocrm_first_deals')) as id
+      
+    , company
     , 'amocrm_first_deals' as row_source      
 	, date_payment as create_date
 

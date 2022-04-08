@@ -22,3 +22,51 @@ models:
         tests:
           - not_null
           - unique
+
+  - name: stg_ads_campaigns_facts
+    description: ""
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_ads_ads_facts
+    description: ""
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_ads_keywords_facts
+    description: ""
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_direct_campaigns_facts
+    description: ""
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_facebook_ads_facts
+    description: ""
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_facebook_campaigns_facts
+    description: ""
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique

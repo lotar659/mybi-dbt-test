@@ -1,6 +1,7 @@
 select
 
-	  account_id
+      id
+	, account_id
 	, caption
 	, company	  
 	, dt
@@ -26,7 +27,8 @@ union all
 
 select
 
-	  account_id
+      id
+	, account_id
 	, caption
 	, company	  
 	, dt

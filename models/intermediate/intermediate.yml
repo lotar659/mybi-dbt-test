@@ -3,9 +3,59 @@ version: 2
 
 models:
 
+  - name: intermediate_ads_ads
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+  - name: intermediate_ads_keywords
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+  - name: intermediate_ads
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+
+  - name: intermediate_direct_context
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+  - name: intermediate_direct_search
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+  - name: intermediate_direct
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+
+  - name: intermediate_facebook
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+
+
   - name: intermediate_costs
     description: ""
     columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
       - name: source
         tests:
           - not_null
@@ -17,8 +67,11 @@ models:
           - not_null
 
   - name: intermediate_visits
-    description: ""
     columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
       - name: company
         tests:
           - not_null
@@ -46,9 +99,17 @@ models:
 
   - name: intermediate_amocrm
     description: ""
+    tests:
+      - unique:
+          column_name: (cast(id as String) || company)    
     columns:
       - name: id
         tests:
-          - unique:
-              severity: warn
           - not_null
+
+  - name: intermediate_tracker
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
