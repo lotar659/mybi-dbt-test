@@ -1,6 +1,7 @@
 select
 
       id
+    , traffic_id
 	, account_id
 	, caption
 	, company	  
@@ -16,6 +17,7 @@ select
     , keyword
     , domain
     , landing_page    
+    , region_id
 
 	, impressions
 	, clicks
@@ -28,6 +30,7 @@ union all
 select
 
       id
+    , traffic_id
 	, account_id
 	, caption
 	, company	  
@@ -42,8 +45,9 @@ select
     , content
     , keyword
     , domain
-    , landing_page    
-
+    , landing_page
+    , region_id
+    
 	, impressions
 	, clicks
 	, cost

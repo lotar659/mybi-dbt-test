@@ -24,6 +24,7 @@ SELECT
     , gt.keyword as keyword
     , gs.domain as domain
     , gt.landing_page as landing_page
+    , gt.region_id as region_id
 	
 	, cf.impressions_context as impressions
 	, cf.clicks_context as clicks

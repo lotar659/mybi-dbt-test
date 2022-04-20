@@ -2,6 +2,7 @@ SELECT
 
 	  cf.account_id as account_id
     , halfMD5(CONCAT(CAST(cf.id, 'String'), 'stg_ads_ads_facts')) as id
+    , gt.id as traffic_id
 
 	, ga.caption as caption 
 	, CASE
@@ -23,6 +24,7 @@ SELECT
     , gt.keyword as keyword
     , gs.domain as domain
     , gt.landing_page as landing_page
+    , gt.region_id as region_id
 	  
 	, cf.impressions as impressions
 	, cf.clicks as clicks

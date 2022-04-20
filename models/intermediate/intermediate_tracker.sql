@@ -81,7 +81,7 @@ select
     , keyword
     , landing_page    
     , device
-    , 'undefined' as region
+    , region
 
 -------------------------
 --  intermediate_costs --
@@ -119,6 +119,7 @@ select
     , null as price
 
 from {{ ref('intermediate_costs') }}
+    left any join {{ ref('intermediate_regions_mapping') }} using (region_id)
 
 -----------------------------
 --  3. INTERMEDIATE_AMOCRM --

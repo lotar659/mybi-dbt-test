@@ -16,6 +16,7 @@ SELECT
     , content
     , keyword
     , concat('https://', domain, landing_page) as landing_page
+    , region_id
 	
 	, impressions
 	, clicks
@@ -43,6 +44,7 @@ SELECT
     , content
     , keyword
     , concat('https://', domain, landing_page) as landing_page
+    , region_id
 	  
 	, impressions
 	, clicks
@@ -70,6 +72,7 @@ SELECT
     , content
     , keyword
     , concat('https://', domain, landing_page) as landing_page
+    , region_id
 	  
 	, impressions
 	, clicks
@@ -98,6 +101,7 @@ SELECT
     , '' as content
     , '' as keyword
     , '' as landing_page
+    , 0 as region_id
 	  
 	, 0
 	, 0

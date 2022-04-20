@@ -15,7 +15,8 @@ select
     , content
     , keyword
     , domain
-    , landing_page    
+    , landing_page
+    , region_id
 
 	, impressions
 	, clicks
@@ -42,7 +43,8 @@ select
     , content
     , keyword
     , domain
-    , landing_page    
+    , landing_page
+    , region_id
 
 	, impressions
 	, clicks
