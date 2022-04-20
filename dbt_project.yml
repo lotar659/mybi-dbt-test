@@ -41,8 +41,6 @@ models:
                 +tags: ["amocrm"]
             costs:
                 +tags: ["costs"]
-                +materialized: "incremental"
-                +unique_key: "id"
             visits:
                 +tags: ["visits"]        
 
