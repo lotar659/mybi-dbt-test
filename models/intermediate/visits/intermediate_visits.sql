@@ -82,7 +82,7 @@ SELECT
         WHEN 2 THEN 'MOBILE'
         WHEN 3 THEN 'TABLET'
         WHEN 4 THEN 'TV'
-        ELSE ''
+        ELSE 'undefined'
       END AS device
     , `ym:s:regionCity` as region
 

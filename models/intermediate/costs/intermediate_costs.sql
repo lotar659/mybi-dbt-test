@@ -91,7 +91,7 @@ SELECT
 	, company
 	, date_month as dt
 	, 'organic' as traffic_source    
-    , '' as device
+    , 'undefined' as device
 	  
     , '' as source
     , '' as medium

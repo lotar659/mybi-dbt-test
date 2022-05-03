@@ -52,7 +52,9 @@ select
 	, null as responsible_user
 	, null as status
 	, null as pipeline
-    , null as type    
+    , null as type
+    , null as format
+    , null as form
 	
     , null as price
 
@@ -115,6 +117,8 @@ select
 	, null as status
 	, null as pipeline
     , null as type
+    , null as format
+    , null as form    
 	
     , null as price
 
@@ -178,6 +182,8 @@ select
 	, status
 	, pipeline
     , type
+    , format
+    , form
 	
     , price
 
@@ -238,7 +244,9 @@ select
 	, responsible_user
 	, status
 	, pipeline
-    , type    
+    , type
+    , format
+    , form    
 	
     , price
 
@@ -301,7 +309,9 @@ select
 	, responsible_user
 	, status
 	, pipeline
-    , type    
+    , type
+    , format
+    , form    
 	
     , price
 

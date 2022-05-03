@@ -106,7 +106,7 @@ SELECT
 
     , visits.keyword as keyword
     , visits.landing_page as landing_page
-    , visits.device as device
+    , if(notEmpty(visits.device), visits.device, 'undefined') as device
     , visits.region as region
 
 FROM {{ ref('stg_amocrm_united') }} AS amocrm

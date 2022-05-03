@@ -34,7 +34,9 @@ select
 	, responsible_user
 	, status
 	, pipeline
-    , type    
+    , type
+    , format
+    , form    
 	
     , price
 
