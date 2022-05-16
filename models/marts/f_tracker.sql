@@ -6,16 +6,16 @@ select
     , row_source      
     , create_date
 
-	, traffic_source
-	, `source`
-	, medium
-	, campaign
-	, content
+	, if(traffic_source = '', 'undefined', traffic_source) as traffic_source
+	, if(`source` = '', 'undefined', `source`) as `source`
+	, if(medium = '', 'undefined', medium) as medium
+	, if(campaign = '', 'undefined', campaign) as campaign
+	, if(content = '', 'undefined', content) as content
 
-    , keyword
-    , landing_page    
-    , device
-    , region    
+	, if(keyword = '', 'undefined', keyword) as keyword
+	, if(landing_page = '', 'undefined', landing_page) as landing_page
+	, if(device = '', 'undefined', device) as device
+	, if(region = '', 'undefined', region) as region
 
 	-- costs
 	, impressions

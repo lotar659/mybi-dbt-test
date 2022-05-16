@@ -4,7 +4,7 @@ CREATE TABLE dbt.margin_rate (
 	, `company` String
 	, `margin_rate` Float32
 )
-ENGINE=URL('https://docs.google.com/spreadsheets/d/1dQLDrUuB_MfBtXX8LxqbgzZxnigdPkBXw-s6GnnQwBc/gviz/tq?tqx=out:csv&sheet=margin_rate', CSVWithNames)
+ENGINE=URL('http://wh.zmtech.ru/api/deco_info?separator=,', CSVWithNames)
 ;
 
 SELECT * FROM dbt.margin_rate LIMIT 200 ;

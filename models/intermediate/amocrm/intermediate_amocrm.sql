@@ -105,7 +105,7 @@ SELECT
 	  end as content
 
     , visits.keyword as keyword
-    , visits.landing_page as landing_page
+    , cutQueryString(amocrm.href) as landing_page
     , if(notEmpty(visits.device), visits.device, 'undefined') as device
     , visits.region as region
 
