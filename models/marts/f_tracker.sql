@@ -36,7 +36,9 @@ select
 	, pipeline
     , type
     , format
-    , form    
+    , form
+    , if(sphere = '', 'undefined', sphere) as sphere
+    , is_blog
 	
     , price
 

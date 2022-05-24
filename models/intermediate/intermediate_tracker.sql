@@ -55,6 +55,8 @@ select
     , null as type
     , null as format
     , null as form
+    , null as sphere
+    , null as is_blog
 	
     , null as price
 
@@ -118,7 +120,9 @@ select
 	, null as pipeline
     , null as type
     , null as format
-    , null as form    
+    , null as form
+    , null as sphere
+    , null as is_blog
 	
     , null as price
 
@@ -184,6 +188,8 @@ select
     , type
     , format
     , form
+    , sphere
+    , is_blog
 	
     , price
 
@@ -246,7 +252,9 @@ select
 	, pipeline
     , type
     , format
-    , form    
+    , form
+    , sphere
+    , is_blog
 	
     , price
 
@@ -311,7 +319,9 @@ select
 	, pipeline
     , type
     , format
-    , form    
+    , form
+    , sphere
+    , is_blog
 	
     , price
 

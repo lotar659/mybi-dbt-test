@@ -109,6 +109,15 @@ SELECT
     , if(notEmpty(visits.device), visits.device, 'undefined') as device
     , visits.region as region
 
+    , case
+        when amocrm.form in ('Регистрация через webhookBlog') then 1
+        when amocrm.UTM_Source in ('blog') then 1
+        when amocrm.UTM_Source1 in ('blog') then 1
+        when amocrm.`source` in ('blog') then 1
+        when amocrm.UTM_Campaign ilike '%blog%' then 1
+        else 0
+      end as is_blog
+
 FROM {{ ref('stg_amocrm_united') }} AS amocrm
 	LEFT JOIN intermediate_visits AS visits ON visits.client_id = amocrm.client_id_int
 		and visits.dt = cast(amocrm.date_create as Date)
