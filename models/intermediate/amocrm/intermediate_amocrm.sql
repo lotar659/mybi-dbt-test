@@ -19,6 +19,7 @@ with intermediate_visits as (
 
 		--, traffic_source_importance
 		, row_number() over (partition by client_id, dt order by traffic_source_importance asc) as rn	
+		, row_number() over (partition by client_id order by traffic_source_importance asc) as rn_global	
 
 	from {{ ref('intermediate_visits') }}
 	where client_id not in (0)
@@ -82,32 +83,32 @@ SELECT
 	, amocrm.fbclid as fbclid
 	, amocrm.company as company
 
-	, visits.traffic_source as traffic_source
+	, coalesce(visits_date_create.traffic_source, visits_date_payment.traffic_source, visits_no_date.traffic_source, 'undefined') as traffic_source
 
 	, case 
 		when amocrm.UTM_Source in ('referal') then amocrm.UTM_Source
-		else visits.source
+		else coalesce(visits_date_create.source, visits_date_payment.source, visits_no_date.source, 'undefined')
 	  end as source
 
 	, case 
 		when amocrm.UTM_Source in ('referal') then 'undefined'
-		else visits.medium
+		else coalesce(visits_date_create.medium, visits_date_payment.medium, visits_no_date.medium, 'undefined')
 	  end as medium
 
 	, case 
 		when amocrm.UTM_Source in ('referal') then 'undefined'
-		else visits.campaign
+		else coalesce(visits_date_create.campaign, visits_date_payment.campaign, visits_no_date.campaign, 'undefined')
 	  end as campaign
 
 	, case 
 		when amocrm.UTM_Source in ('referal') then amocrm.UTM_Content
-		else visits.content
+		else coalesce(visits_date_create.content, visits_date_payment.content, visits_no_date.content, 'undefined')
 	  end as content
 
-    , visits.keyword as keyword
+    , coalesce(visits_date_create.keyword, visits_date_payment.keyword, visits_no_date.keyword, 'undefined') as keyword
     , cutQueryString(amocrm.href) as landing_page
-    , if(notEmpty(visits.device), visits.device, 'undefined') as device
-    , visits.region as region
+    , coalesce(visits_date_create.device, visits_date_payment.device, visits_no_date.device, 'undefined') as device
+    , coalesce(visits_date_create.region, visits_date_payment.region, visits_no_date.region, 'undefined') as region
 
     , case
         when amocrm.form in ('Регистрация через webhookBlog') then 1
@@ -119,9 +120,14 @@ SELECT
       end as is_blog
 
 FROM {{ ref('stg_amocrm_united') }} AS amocrm
-	LEFT JOIN intermediate_visits AS visits ON visits.client_id = amocrm.client_id_int
-		and visits.dt = cast(amocrm.date_create as Date)
-		and visits.rn = cast(1 as UInt64)
+	LEFT JOIN intermediate_visits AS visits_date_create ON visits_date_create.client_id = amocrm.client_id_int
+		and visits_date_create.dt = cast(amocrm.date_create as Date)
+		and visits_date_create.rn = cast(1 as UInt64)
+	LEFT JOIN intermediate_visits AS visits_date_payment ON visits_date_payment.client_id = amocrm.client_id_int
+		and visits_date_payment.dt = cast(amocrm.date_payment as Date)
+		and visits_date_payment.rn = cast(1 as UInt64)
+	LEFT JOIN intermediate_visits AS visits_no_date ON visits_no_date.client_id = amocrm.client_id_int
+		and visits_no_date.rn_global = cast(1 as UInt64)        
 
 WHERE 1 = 1
 	AND amocrm.pipeline IN ('manual mode', 'auto mode', 'брак')
@@ -131,3 +137,5 @@ WHERE 1 = 1
 	AND amocrm.source NOT IN ('voice')
 --	AND form_class NOT IN ('partnerka')
 --	AND date_create >= '2021-11-01'
+
+settings join_use_nulls = 1
