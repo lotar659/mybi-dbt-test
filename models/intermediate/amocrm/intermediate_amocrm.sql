@@ -137,5 +137,6 @@ WHERE 1 = 1
 	AND amocrm.source NOT IN ('voice')
 --	AND form_class NOT IN ('partnerka')
 --	AND date_create >= '2021-11-01'
+    AND amocrm.id NOT IN (31322112)
 
 settings join_use_nulls = 1
