@@ -86,7 +86,7 @@ SELECT
 	, coalesce(visits_date_create.traffic_source, visits_date_payment.traffic_source, visits_no_date.traffic_source, 'undefined') as traffic_source
 
 	, case 
-		when amocrm.UTM_Source in ('referal') then amocrm.UTM_Source
+		when (amocrm.UTM_Source in ('referal') or amocrm.`source` in ('referal')) then 'referal'
 		else coalesce(visits_date_create.source, visits_date_payment.source, visits_no_date.source, 'undefined')
 	  end as source
 

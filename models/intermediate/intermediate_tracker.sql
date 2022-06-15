@@ -138,7 +138,7 @@ union all
 select
 
       
-      halfMD5(CONCAT(CAST(id, 'String'), company, 'amocrm')) as id
+      halfMD5(CONCAT(CAST(id, 'String'), company, 'amocrm')) as row_id
       
     , company
     , 'amocrm' as row_source      
@@ -203,7 +203,7 @@ union all
 
 select
 
-      halfMD5(CONCAT(CAST(id, 'String'), company, 'amocrm_rejected')) as id
+      halfMD5(CONCAT(CAST(id, 'String'), company, 'amocrm_rejected')) as row_id
       
     , company
     , 'amocrm_rejected' as row_source      
@@ -270,7 +270,7 @@ union all
 
 select
 
-      halfMD5(CONCAT(CAST(id, 'String'), company, 'amocrm_first_deals')) as id
+      halfMD5(CONCAT(CAST(id, 'String'), company, 'amocrm_first_deals')) as row_id
       
     , company
     , 'amocrm_first_deals' as row_source      
