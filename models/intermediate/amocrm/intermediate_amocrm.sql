@@ -83,7 +83,10 @@ SELECT
 	, amocrm.fbclid as fbclid
 	, amocrm.company as company
 
-	, coalesce(visits_date_create.traffic_source, visits_date_payment.traffic_source, visits_no_date.traffic_source, 'undefined') as traffic_source
+	, case
+        when amocrm.`source` in ('Квиз') then 'ad'
+        else coalesce(visits_date_create.traffic_source, visits_date_payment.traffic_source, visits_no_date.traffic_source, 'undefined')
+      end as traffic_source
 
 	, case 
 		when (amocrm.UTM_Source in ('referal') or amocrm.`source` in ('referal')) then 'referal'
