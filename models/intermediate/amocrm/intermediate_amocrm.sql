@@ -85,6 +85,7 @@ SELECT
 
 	, case
         when amocrm.`source` in ('Квиз') then 'ad'
+        when amocrm.`source` in ('yandex.search', 'yandex.context') then 'ad'
         else coalesce(visits_date_create.traffic_source, visits_date_payment.traffic_source, visits_no_date.traffic_source, 'undefined')
       end as traffic_source
 
