@@ -135,12 +135,9 @@ FROM {{ ref('stg_amocrm_united') }} AS amocrm
 
 WHERE 1 = 1
 	AND amocrm.pipeline IN ('manual mode', 'auto mode', 'брак')
---	AND pipeline NOT IN ('брак')
---	AND "type" IN ('Первая')
 	AND amocrm.responsible_user NOT IN ('RAMMBOT', 'unknown')	
 	AND amocrm.source NOT IN ('voice')
---	AND form_class NOT IN ('partnerka')
---	AND date_create >= '2021-11-01'
+    AND form_class NOT IN ('partnerka')
     AND amocrm.id NOT IN (31322112, 30296008)
 
 settings join_use_nulls = 1
