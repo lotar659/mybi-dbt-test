@@ -137,8 +137,7 @@ WHERE 1 = 1
 	AND amocrm.pipeline IN ('manual mode', 'auto mode', 'брак')
 	AND amocrm.responsible_user NOT IN ('RAMMBOT', 'unknown')	
 	AND amocrm.source NOT IN ('voice')
-    AND amocrm.form_class NOT IN ('partnerka')
-    AND amocrm.tags NOT LIKE '%(ТЕХВИК)%'
+    -- AND amocrm.form_class NOT IN ('partnerka')
     AND amocrm.id NOT IN (31322112, 30296008)
 
 settings join_use_nulls = 1

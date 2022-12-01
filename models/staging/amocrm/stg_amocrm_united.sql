@@ -54,10 +54,12 @@ SELECT
 FROM {{ source('amocrm', 'smsdar') }}
 WHERE 1=1
     AND (
-        date_create <= '2022-04-30 18:00:00'
-            OR `source` != 'referal'
+        date_create <= '2021-03-31 18:00:00'
+            OR (
+                `source` != 'instagram'
+                    OR UTM_Campaign != 'maxim'
+            )
     )
-    
 
 UNION ALL 
 
@@ -123,14 +125,6 @@ WHERE 1=1
                     OR UTM_Campaign != 'maxim'
             )
     )
-    AND (
-        date_create <= '2022-03-31 18:00:00'
-            OR tags NOT LIKE '%(gfeconf)%'
-    )
-    AND (
-        date_create <= '2022-04-30 18:00:00'
-            OR `source` != 'referal'
-    ) 
 
 UNION ALL
 
@@ -195,8 +189,4 @@ WHERE 1=1
                 `source` != 'instagram'
                     AND `source` != 'facebook'
             )
-    )
-    AND (
-        date_create <= '2022-04-30 18:00:00'
-            OR `source` != 'referal'
     )
