@@ -91,6 +91,7 @@ SELECT
 
 	, case 
 		when (amocrm.UTM_Source in ('referal') or amocrm.`source` in ('referal')) then 'referal'
+        when amocrm.`source` in ('yandex.search', 'yandex.context') then amocrm.`source`
 		else coalesce(visits_date_create.source, visits_date_payment.source, visits_no_date.source, 'undefined')
 	  end as source
 
@@ -138,6 +139,6 @@ WHERE 1 = 1
 	AND amocrm.responsible_user NOT IN ('RAMMBOT', 'unknown')	
 	AND amocrm.source NOT IN ('voice')
     -- AND amocrm.form_class NOT IN ('partnerka')
-    AND amocrm.id NOT IN (31322112, 30296008)
+    AND amocrm.id NOT IN (31322112, 30296008, 12484007, 22905903)
 
 settings join_use_nulls = 1
