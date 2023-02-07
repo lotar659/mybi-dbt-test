@@ -25,7 +25,7 @@ select
 
 from {{ ref('intermediate_ads_ads') }}
 
-union all
+{# union all
 
 select
 
@@ -53,3 +53,4 @@ select
 	, cost
 
 from {{ ref('intermediate_ads_keywords') }}
+ #}
