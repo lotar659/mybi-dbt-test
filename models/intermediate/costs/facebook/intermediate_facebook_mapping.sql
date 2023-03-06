@@ -18,4 +18,4 @@ FROM {{ ref('stg_facebook_ads_facts') }} as af
     LEFT JOIN {{ ref('stg_facebook_adsets') }} as ag on ag.id = af.adsets_id
     LEFT JOIN {{ ref('stg_facebook_ads') }} as aa on aa.id = af.ads_id
 
-settings join_use_nulls = 1
+settings join_use_nulls = 0

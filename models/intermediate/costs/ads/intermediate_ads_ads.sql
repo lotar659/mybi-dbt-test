@@ -53,4 +53,4 @@ FROM {{ ref('stg_ads_ads_facts') }} AS cf
 			AND cif2.items_id = CAST(22 AS Int32)
 			AND cf.account_id = CAST(35964 AS Int32)
 
-settings join_use_nulls = 1
+settings join_use_nulls = 0

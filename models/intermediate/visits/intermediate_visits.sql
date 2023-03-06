@@ -136,4 +136,4 @@ from parsed
   left any join {{ ref('intermediate_costs_mapping') }} as gid on gid.adgroup_id = parsed.campaign_id
   left any join {{ ref('intermediate_costs_mapping') }} as aid on aid.ad_id = parsed.campaign_id
 
-settings join_use_nulls = 1  
+settings join_use_nulls = 0  

@@ -84,14 +84,22 @@ SELECT
 	, amocrm.company as company
 
 	, case
-        when amocrm.`source` in ('Квиз') then 'ad'
-        when amocrm.`source` in ('yandex.search', 'yandex.context') then 'ad'
+        when (amocrm.`source` in ('Квиз')) then 'ad'
+        when (amocrm.`source` in ('yandex.search', 'yandex.context')) then 'ad'
+        when (amocrm.UTM_Source in ('getintent')) then 'ad'
+        when (amocrm.UTM_Source in ('telegram')) then 'ad'
+        when (amocrm.UTM_Source in ('web_webinar')) then 'ad'
+        when (amocrm.`source` in ('event')) then 'ad'
         else coalesce(visits_date_create.traffic_source, visits_date_payment.traffic_source, visits_no_date.traffic_source, 'undefined')
       end as traffic_source
 
 	, case 
 		when (amocrm.UTM_Source in ('referal') or amocrm.`source` in ('referal')) then 'referal'
-        when amocrm.`source` in ('yandex.search', 'yandex.context') then amocrm.`source`
+        when (amocrm.`source` in ('yandex.search', 'yandex.context')) then amocrm.`source`
+        when (amocrm.UTM_Source in ('getintent')) then 'getintent'
+        when (amocrm.UTM_Source in ('telegram')) then 'tg_bot'
+        when (amocrm.UTM_Source in ('web_webinar')) then 'web_webinar'
+        when (amocrm.`source` in ('event')) then 'event'
 		else coalesce(visits_date_create.source, visits_date_payment.source, visits_no_date.source, 'undefined')
 	  end as source
 
@@ -141,4 +149,4 @@ WHERE 1 = 1
     -- AND amocrm.form_class NOT IN ('partnerka')
     AND amocrm.id NOT IN (31322112, 30296008, 12484007, 22905903)
 
-settings join_use_nulls = 1
+settings join_use_nulls = 0

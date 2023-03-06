@@ -1,56 +1,25 @@
 select
 
-      id
-    , traffic_id
-	, account_id
-	, caption
-	, company	  
-	, dt
+	  CAST(id, 'UInt64') as id
+    , account_id
+	, caption 
+	, company	    
+    , dt
+    , 'ad' as traffic_source
     , device
-
-	, source
-	, medium
+	  
+    , coalesce(source, 'undefined') as source
+    , coalesce(medium, 'undefined') as medium
 	, campaign_id
-	, campaign
+  	, coalesce(campaign, 'undefined') as campaign
     , traffic_campaign
     , content
     , keyword
-    , domain
-    , landing_page    
+    , concat('https://', domain, landing_page) as landing_page
     , region_id
-
+	
 	, impressions
 	, clicks
-	, cost
+	, CAST(cost AS Float64) as cost    
 
 from {{ ref('intermediate_ads_ads') }}
-
-{# union all
-
-select
-
-      id
-    , traffic_id
-	, account_id
-	, caption
-	, company	  
-	, dt
-    , device
-
-	, source
-	, medium
-	, campaign_id
-	, campaign
-    , traffic_campaign
-    , content
-    , keyword
-    , domain
-    , landing_page
-    , region_id
-    
-	, impressions
-	, clicks
-	, cost
-
-from {{ ref('intermediate_ads_keywords') }}
- #}

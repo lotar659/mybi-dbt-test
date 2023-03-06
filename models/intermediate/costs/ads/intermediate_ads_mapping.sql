@@ -40,4 +40,4 @@ FROM {{ ref('stg_ads_keywords_facts') }} as af
     LEFT JOIN {{ ref('stg_ads_adgroups') }} as ag on ag.id = af.adgroups_id
     LEFT JOIN {{ ref('stg_ads_keywords') }} as aa on aa.id = af.keywords_id
 
-settings join_use_nulls = 1	
+settings join_use_nulls = 0	

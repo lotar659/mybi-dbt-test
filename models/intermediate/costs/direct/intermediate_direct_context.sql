@@ -42,4 +42,4 @@ FROM {{ ref('stg_direct_ads_facts') }} AS cf
 	LEFT JOIN {{ ref('stg_general_traffic') }} AS gt
 		ON gt.id = cf.traffic_id
 
-settings join_use_nulls = 1
+settings join_use_nulls = 0
