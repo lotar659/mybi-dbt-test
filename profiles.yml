@@ -4,16 +4,26 @@ config:
     partial_parse: True
 
 mybi_dbt_ramm:
-  target: "{{ env_var('DBT_TARGET') }}"
+  target: prod
   outputs:
     prod:
+      type: clickhouse
+      schema: dbt
+      host: "{{ env_var('DBT_HOST') }}"
+      port: 8443
+      user: "{{ env_var('DBT_USER') }}"
+      password: "{{ env_var('DBT_PASSWORD') }}"
+      secure: True
+      verify: False
+      threads: 1
+    dev:
       type: clickhouse
       schema: "{{ env_var('DBT_SCHEMA') }}"
       host: "{{ env_var('DBT_HOST') }}"
       port: "{{ env_var('DBT_PORT') | int }}"
       user: "{{ env_var('DBT_USER') }}"
       password: "{{ env_var('DBT_PASSWORD') }}"
-      secure: "{{ env_var('DBT_SECURE') | as_bool }}"
+      secure: True
       threads: 1
     # ci:
     #   type: clickhouse
