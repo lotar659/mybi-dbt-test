@@ -51,3 +51,45 @@ ENGINE=URL('https://docs.google.com/spreadsheets/d/1dQLDrUuB_MfBtXX8LxqbgzZxnigd
 ;
 
 select * from dbt.organic_costs limit 200 ;
+
+
+-- DROP TABLE dbt.zen ;
+CREATE TABLE dbt.zen (
+	  `date_month` Date
+	, `company` String
+	, `cost` Float64
+)
+ENGINE=URL('https://docs.google.com/spreadsheets/d/1dQLDrUuB_MfBtXX8LxqbgzZxnigdPkBXw-s6GnnQwBc/gviz/tq?tqx=out:csv&sheet=zen', CSVWithNames)
+;
+-- DROP TABLE dbt.programmatik ;
+CREATE TABLE dbt.programmatik (
+	  `date_month` Date
+	, `company` String
+	, `cost` Float64
+)
+ENGINE=URL('https://docs.google.com/spreadsheets/d/1dQLDrUuB_MfBtXX8LxqbgzZxnigdPkBXw-s6GnnQwBc/gviz/tq?tqx=out:csv&sheet=programmatik', CSVWithNames)
+;
+-- DROP TABLE dbt.tg_bot ;
+CREATE TABLE dbt.tg_bot (
+	  `date_month` Date
+	, `company` String
+	, `cost` Float64
+)
+ENGINE=URL('https://docs.google.com/spreadsheets/d/1dQLDrUuB_MfBtXX8LxqbgzZxnigdPkBXw-s6GnnQwBc/gviz/tq?tqx=out:csv&sheet=tg_bot', CSVWithNames)
+;
+-- DROP TABLE dbt.web_webinar ;
+CREATE TABLE dbt.web_webinar (
+	  `date_month` Date
+	, `company` String
+	, `cost` Float64
+)
+ENGINE=URL('https://docs.google.com/spreadsheets/d/1dQLDrUuB_MfBtXX8LxqbgzZxnigdPkBXw-s6GnnQwBc/gviz/tq?tqx=out:csv&sheet=web_webinar', CSVWithNames)
+;
+-- DROP TABLE dbt.event ;
+CREATE TABLE dbt.event (
+	  `date_month` Date
+	, `company` String
+	, `cost` Float64
+)
+ENGINE=URL('https://docs.google.com/spreadsheets/d/1dQLDrUuB_MfBtXX8LxqbgzZxnigdPkBXw-s6GnnQwBc/gviz/tq?tqx=out:csv&sheet=event', CSVWithNames)
+;

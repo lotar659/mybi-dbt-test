@@ -15,9 +15,11 @@ sources:
     tables:
 
       - name: margin_rate
-
       - name: source_mapping
-
       - name: campaign_mapping
-
       - name: organic_costs
+      - name: zen
+      - name: programmatik
+      - name: tg_bot
+      - name: web_webinar
+      - name: event
