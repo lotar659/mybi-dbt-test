@@ -1,0 +1,73 @@
+name: Deploy dbt project
+
+# Controls when the action will run. 
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 5 * * *'
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}  
+
+jobs:
+
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+  dbt_deploy:
+    runs-on: ubuntu-latest
+    needs: [build-and-push-image]
+    container:
+      image: ghcr.io/kzzzr/mybi-dbt-ramm:master
+      env:
+        DBT_HOST: ${{ secrets.DBT_HOST }}
+        DBT_USER: ${{ secrets.DBT_USER }}
+        DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v3
+      - run: dbt --version
+      - run: dbt debug
+      - run: dbt deps
+      - run: dbt build --full-refresh
+      - name: Send Telegram message
+        if: always()
+        uses: xinthink/action-telegram@v1.1
+        with:
+          botToken: ${{ secrets.TELEGRAM_TOKEN }}
+          chatId: ${{ secrets.TELEGRAM_TO }}
+          jobStatus: ${{ job.status }}
+          skipSuccess: false
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ failure() }}
+        timeout-minutes: 10

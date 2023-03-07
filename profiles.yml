@@ -18,9 +18,9 @@ mybi_dbt_ramm:
       threads: 1
     dev:
       type: clickhouse
-      schema: "{{ env_var('DBT_SCHEMA') }}"
+      schema: dev
       host: "{{ env_var('DBT_HOST') }}"
-      port: "{{ env_var('DBT_PORT') | int }}"
+      port: 8443
       user: "{{ env_var('DBT_USER') }}"
       password: "{{ env_var('DBT_PASSWORD') }}"
       secure: True
@@ -32,5 +32,4 @@ mybi_dbt_ramm:
     #   port: "{{ env_var('DBT_PORT') | int }}"
     #   user: "{{ env_var('DBT_USER') }}"
     #   password: "{{ env_var('DBT_PASSWORD') }}"
-    #   secure: "{{ env_var('DBT_SECURE') | as_bool }}"
     #   threads: 3  
