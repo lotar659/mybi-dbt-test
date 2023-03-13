@@ -9,7 +9,11 @@ SELECT
     , `ym:s:dateTimeUTC` as ts
     , `ym:s:clientID` as client_id	
 
-    , `ym:s:lastTrafficSource` as traffic_source
+    , case
+        -- OVERRIDE
+        when `ym:s:UTMSource` IN ('youtube') then 'social'
+        else `ym:s:lastTrafficSource`
+      end as traffic_source
     , case
         -- ad
         when traffic_source in ('ad') then 1
@@ -35,8 +39,11 @@ SELECT
         when traffic_source in ('recommend') then 11
         else 12
     end as traffic_source_importance
-
     , case
+        -- OVERRIDE
+        when `ym:s:UTMSource` IN ('getintent') then 'getintent'
+        when `ym:s:UTMSource` IN ('youtube') then 'youtube'
+        when `ym:s:UTMSource` IN ('yandex.zen', 'yandex.promopages') then 'yandex.zen'
         -- ad
         when traffic_source in ('ad') then coalesce(source_mapping.master, nullif(`ym:s:UTMSource`, ''), 'undefined')
         -- direct

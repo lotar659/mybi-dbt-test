@@ -90,6 +90,7 @@ SELECT
         when (amocrm.UTM_Source in ('telegram')) then 'ad'
         when (amocrm.UTM_Source in ('web_webinar')) then 'ad'
         when (amocrm.`source` in ('event')) then 'ad'
+        when (amocrm.`source` in ('youtube')) then 'social'
         else coalesce(visits_date_create.traffic_source, visits_date_payment.traffic_source, visits_no_date.traffic_source, 'undefined')
       end as traffic_source
 
@@ -100,6 +101,8 @@ SELECT
         when (amocrm.UTM_Source in ('telegram')) then 'tg_bot'
         when (amocrm.UTM_Source in ('web_webinar')) then 'web_webinar'
         when (amocrm.`source` in ('event')) then 'event'
+        when (amocrm.`source` in ('youtube')) then 'youtube'
+        when (amocrm.`source` in ('yandex.zen')) then 'yandex.zen'
 		else coalesce(visits_date_create.source, visits_date_payment.source, visits_no_date.source, 'undefined')
 	  end as source
 
