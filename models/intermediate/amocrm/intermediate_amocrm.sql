@@ -151,6 +151,6 @@ WHERE 1 = 1
 	AND amocrm.source NOT IN ('voice')
     -- AND amocrm.form_class NOT IN ('partnerka')
     AND amocrm.id NOT IN (31322112, 30296008, 12484007, 22905903)
-    AND amocrm.tags NOT ILIKE ('%ПП Вадим%')
+    -- AND amocrm.tags NOT ILIKE ('%ПП Вадим%')
 
 settings join_use_nulls = 0
