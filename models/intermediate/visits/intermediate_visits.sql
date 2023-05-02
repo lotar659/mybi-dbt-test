@@ -95,7 +95,7 @@ SELECT
 
 FROM {{ ref('stg_visits_united') }} as visits
     LEFT ANY JOIN {{ source('gsheet', 'source_mapping') }} as source_mapping on source_mapping.raw = visits.`ym:s:UTMSource`
-    LEFT ANY JOIN {{ source('gsheet', 'campaign_mapping') }} as campaign_mapping on campaign_mapping.company = visits.company
+    LEFT ANY JOIN {{ ref('gsheet_campaign_mapping') }} as campaign_mapping on campaign_mapping.company = visits.company
         and campaign_mapping.`UTMCampaign` = visits.`ym:s:UTMCampaign`
 
 )

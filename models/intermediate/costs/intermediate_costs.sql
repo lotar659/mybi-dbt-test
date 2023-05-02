@@ -11,7 +11,12 @@
     , ref('gsheet_event')
 ] %}
 
-{{ dbt_utils.union_relations(
-    relations=relations_list
-    ,exclude=['']
-) }}
+
+select * from (
+
+    {{ dbt_utils.union_relations(
+        relations=relations_list
+        ,exclude=['']
+    ) }}
+
+)
