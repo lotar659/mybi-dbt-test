@@ -85,40 +85,40 @@ SELECT
 
 	, case
         when (amocrm.`source` in ('Квиз')) then 'ad'
-        when (amocrm.`source` in ('yandex.search', 'yandex.context')) then 'ad'
+        when (amocrm.`source` in ('yandex.search', 'yandex.context', 'google')) then 'ad'
         when (amocrm.UTM_Source in ('getintent')) then 'ad'
         when (amocrm.UTM_Source in ('telegram')) then 'ad'
         when (amocrm.UTM_Source in ('web_webinar')) then 'ad'
         when (amocrm.`source` in ('event')) then 'ad'
         when (amocrm.`source` in ('youtube')) then 'social'
-        else coalesce(visits_date_create.traffic_source, visits_date_payment.traffic_source, visits_no_date.traffic_source, 'undefined')
+        else coalesce(nullif(visits_date_create.traffic_source, ''), nullif(visits_date_payment.traffic_source, ''), nullif(visits_no_date.traffic_source, ''), 'undefined')
       end as traffic_source
 
 	, case 
 		when (amocrm.UTM_Source in ('referal') or amocrm.`source` in ('referal')) then 'referal'
-        when (amocrm.`source` in ('yandex.search', 'yandex.context')) then amocrm.`source`
+        when (amocrm.`source` in ('yandex.search', 'yandex.context', 'google')) then amocrm.`source`
         when (amocrm.UTM_Source in ('getintent')) then 'getintent'
         when (amocrm.UTM_Source in ('telegram')) then 'tg_bot'
         when (amocrm.UTM_Source in ('web_webinar')) then 'web_webinar'
         when (amocrm.`source` in ('event')) then 'event'
         when (amocrm.`source` in ('youtube')) then 'youtube'
         when (amocrm.`source` in ('yandex.zen')) then 'yandex.zen'
-		else coalesce(visits_date_create.source, visits_date_payment.source, visits_no_date.source, 'undefined')
+		else coalesce(nullif(visits_date_create.source, ''), nullif(visits_date_payment.source, ''), nullif(visits_no_date.source, ''), 'undefined')
 	  end as source
 
 	, case 
 		when amocrm.UTM_Source in ('referal') then 'undefined'
-		else coalesce(visits_date_create.medium, visits_date_payment.medium, visits_no_date.medium, 'undefined')
+        else coalesce(nullif(amocrm.`UTM_Medium`, ''), nullif(visits_date_create.medium, ''), nullif(visits_date_payment.medium, ''), nullif(visits_no_date.medium, ''), 'undefined')
 	  end as medium
 
 	, case 
 		when amocrm.UTM_Source in ('referal') then 'undefined'
-		else coalesce(visits_date_create.campaign, visits_date_payment.campaign, visits_no_date.campaign, 'undefined')
+        else coalesce(nullif(amocrm.`UTM_Campaign`, ''), nullif(visits_date_create.campaign, ''), nullif(visits_date_payment.campaign, ''), nullif(visits_no_date.campaign, ''), 'undefined')
 	  end as campaign
 
 	, case 
 		when amocrm.UTM_Source in ('referal') then amocrm.UTM_Content
-		else coalesce(visits_date_create.content, visits_date_payment.content, visits_no_date.content, 'undefined')
+        else coalesce(nullif(amocrm.`UTM_Content`, ''), nullif(visits_date_create.content, ''), nullif(visits_date_payment.content, ''), nullif(visits_no_date.content, ''), 'undefined')
 	  end as content
 
     , coalesce(visits_date_create.keyword, visits_date_payment.keyword, visits_no_date.keyword, 'undefined') as keyword
