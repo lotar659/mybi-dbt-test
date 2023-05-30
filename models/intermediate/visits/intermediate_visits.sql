@@ -45,7 +45,7 @@ SELECT
         when `ym:s:UTMSource` IN ('youtube') then 'youtube'
         when `ym:s:UTMSource` IN ('yandex.zen', 'yandex.promopages') then 'yandex.zen'
         -- ad
-        when traffic_source in ('ad') then coalesce(source_mapping.master, nullif(`ym:s:UTMSource`, ''), 'undefined')
+        when traffic_source in ('ad') then coalesce(nullif(source_mapping.master, ''), nullif(`ym:s:UTMSource`, ''), 'undefined')
         -- direct
         when traffic_source in ('direct') then 'direct'
         -- internal
