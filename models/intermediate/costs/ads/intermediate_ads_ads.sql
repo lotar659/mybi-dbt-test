@@ -6,14 +6,10 @@ SELECT
 
 	, ga.caption as caption 
 	, CASE
-		WHEN cf.account_id IN (35957) THEN 'zazumedia'
-		WHEN cf.account_id IN (35960) THEN 'smsdar'
-		WHEN cf.account_id IN (35961) THEN 'smsdar'
+		WHEN cf.account_id IN (35957, 48415, 49079) THEN 'zazumedia'
+		WHEN cf.account_id IN (35960, 35961, 47562) THEN 'smsdar'
 		WHEN cf.account_id IN (35964) THEN 'smspobeda'
-		WHEN cf.account_id IN (47562) THEN 'smsdar'
-		WHEN cf.account_id IN (49079) THEN 'zazumedia'
-	  END AS company
-	  
+	  END AS company	  
 	, gd.simple_date AS dt
     , cf.device as device
     , gt.source as source
@@ -49,6 +45,6 @@ FROM {{ ref('stg_ads_ads_facts') }} AS cf
 	LEFT JOIN {{ ref('stg_currency_items_facts') }} AS cif1 
         ON cif1.dates_id = cf.dates_id 
             AND cif1.items_id = CAST(22 AS Int32)
-            AND cf.account_id IN (35957, 35964, 47562, 49079)
+            AND cf.account_id IN (35957, 35964, 47562, 48415, 49079)
 
 settings join_use_nulls = 0
