@@ -15,10 +15,91 @@ sources:
     tables:
 
       - name: source_mapping
+        description: >
+          -- DROP TABLE dbt.source_mapping ;
+          CREATE TABLE dbt.source_mapping (
+              `raw` String
+            , `master` String -- Decimal(32,4)
+          )
+          ENGINE=URL('https://docs.google.com/spreadsheets/d/1dQLDrUuB_MfBtXX8LxqbgzZxnigdPkBXw-s6GnnQwBc/gviz/tq?tqx=out:csv&sheet=source_mapping', CSVWithNames)
+          ;
+        
       - name: campaign_mapping
+        description: >
+          -- DROP TABLE dbt.campaign_mapping ;
+          CREATE TABLE dbt.campaign_mapping (
+              company String
+            , `source` String
+            , UTMCampaign String
+            , campaign_name String
+            , is_enabled UInt8
+          )
+          ENGINE=URL('https://docs.google.com/spreadsheets/d/1dQLDrUuB_MfBtXX8LxqbgzZxnigdPkBXw-s6GnnQwBc/gviz/tq?tqx=out:csv&sheet=campaign_mapping', CSVWithNames)
+          ;
+
+
       - name: organic_costs
+        description: >
+          -- DROP TABLE dbt.organic_costs ;
+          CREATE TABLE dbt.organic_costs (
+              `date_month` Date
+            , `company` String
+            , `cost` Float64
+          )
+          ENGINE=URL('https://docs.google.com/spreadsheets/d/1dQLDrUuB_MfBtXX8LxqbgzZxnigdPkBXw-s6GnnQwBc/gviz/tq?tqx=out:csv&sheet=organic', CSVWithNames)
+          ;
+
       - name: zen
+        description: >
+          -- DROP TABLE dbt.zen ;
+          CREATE TABLE dbt.zen (
+              `date_month` Date
+            , `company` String
+            , `cost` Float64
+          )
+          ENGINE=URL('https://docs.google.com/spreadsheets/d/1dQLDrUuB_MfBtXX8LxqbgzZxnigdPkBXw-s6GnnQwBc/gviz/tq?tqx=out:csv&sheet=zen', CSVWithNames)
+          ;
+
       - name: programmatik
+        description: >
+          -- DROP TABLE dbt.programmatik ;
+          CREATE TABLE dbt.programmatik (
+              `date_month` Date
+            , `company` String
+            , `cost` Float64
+          )
+          ENGINE=URL('https://docs.google.com/spreadsheets/d/1dQLDrUuB_MfBtXX8LxqbgzZxnigdPkBXw-s6GnnQwBc/gviz/tq?tqx=out:csv&sheet=programmatik', CSVWithNames)
+          ;
+
       - name: tg_bot
+        description: >
+          -- DROP TABLE dbt.tg_bot ;
+          CREATE TABLE dbt.tg_bot (
+              `date_month` Date
+            , `company` String
+            , `cost` Float64
+          )
+          ENGINE=URL('https://docs.google.com/spreadsheets/d/1dQLDrUuB_MfBtXX8LxqbgzZxnigdPkBXw-s6GnnQwBc/gviz/tq?tqx=out:csv&sheet=tg_bot', CSVWithNames)
+          ;
+
       - name: web_webinar
+        description: >
+          -- DROP TABLE dbt.web_webinar ;
+          CREATE TABLE dbt.web_webinar (
+              `date_month` Date
+            , `company` String
+            , `cost` Float64
+          )
+          ENGINE=URL('https://docs.google.com/spreadsheets/d/1dQLDrUuB_MfBtXX8LxqbgzZxnigdPkBXw-s6GnnQwBc/gviz/tq?tqx=out:csv&sheet=web_webinar', CSVWithNames)
+          ;
+
       - name: event
+        description: >
+          -- DROP TABLE dbt.event ;
+          CREATE TABLE dbt.event (
+              `date_month` Date
+            , `company` String
+            , `cost` Float64
+          )
+          ENGINE=URL('https://docs.google.com/spreadsheets/d/1dQLDrUuB_MfBtXX8LxqbgzZxnigdPkBXw-s6GnnQwBc/gviz/tq?tqx=out:csv&sheet=event', CSVWithNames)
+          ;
