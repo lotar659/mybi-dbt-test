@@ -46,5 +46,5 @@ select
 	, margin_rate
 
 FROM {{ ref('intermediate_tracker') }} as tracker
-	left join {{ source('gsheet', 'margin_rate') }} as margin_rate on margin_rate.date_month = date_trunc('month', tracker.create_date)
+	left join {{ source('margin_rate', 'margin_rate') }} as margin_rate on margin_rate.date_month = date_trunc('month', tracker.create_date)
         and margin_rate.company = tracker.company

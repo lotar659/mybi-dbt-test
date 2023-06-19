@@ -14,7 +14,6 @@ sources:
 
     tables:
 
-      - name: margin_rate
       - name: source_mapping
       - name: campaign_mapping
       - name: organic_costs
