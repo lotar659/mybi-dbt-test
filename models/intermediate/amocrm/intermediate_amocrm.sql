@@ -122,7 +122,7 @@ SELECT
 	  end as content
 
     , coalesce(visits_date_create.keyword, visits_date_payment.keyword, visits_no_date.keyword, 'undefined') as keyword
-    , cutQueryString(amocrm.href) as landing_page
+    , cutQueryStringAndFragment(amocrm.href) as landing_page
     , coalesce(visits_date_create.device, visits_date_payment.device, visits_no_date.device, 'undefined') as device
     , coalesce(visits_date_create.region, visits_date_payment.region, visits_no_date.region, 'undefined') as region
 

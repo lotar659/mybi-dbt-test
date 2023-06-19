@@ -83,7 +83,7 @@ SELECT
         END AS campaign_id
 
     , `ym:s:UTMTerm` as keyword
-    , cutQueryString(`ym:s:startURL`) as landing_page    
+    , cutQueryStringAndFragment(`ym:s:startURL`) as landing_page    
     , CASE `ym:s:deviceCategory`
         WHEN 1 THEN 'DESKTOP'
         WHEN 2 THEN 'MOBILE'
@@ -122,7 +122,7 @@ SELECT
     , parsed.content as content
 
     , keyword
-    , landing_page    
+    , cutQueryStringAndFragment(landing_page) as landing_page
     , device
     , region    
 
