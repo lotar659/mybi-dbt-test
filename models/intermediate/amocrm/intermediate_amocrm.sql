@@ -128,10 +128,12 @@ SELECT
 
     , case
         when amocrm.form in ('Регистрация через webhookBlog') then 1
+        when amocrm.form in ('Новый лид с блога') then 1
         when amocrm.UTM_Source in ('blog') then 1
         when amocrm.UTM_Source1 in ('blog') then 1
         when amocrm.`source` in ('blog') then 1
         when amocrm.UTM_Campaign ilike '%blog%' then 1
+        when landing_page ilike '%blog.smspobeda.ru%' then 1
         else 0
       end as is_blog
 
